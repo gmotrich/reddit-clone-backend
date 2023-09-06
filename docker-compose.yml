@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  reddit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 'java_reddit'
+    restart: always
+    depends_on:
+      - mysql_db
+    networks:
+      - pj_network
+    ports:
+      - "127.0.0.1:8080:8080"
+
+  mysql_db:
+    image: 'mysql'
+    container_name: 'db_mysql'
+    restart: always
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Vasiligopnik2
+      MYSQL_DATABASE: reddit
+
